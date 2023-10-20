@@ -1,0 +1,261 @@
+[ {
+  "firstName" : "Stanislav",
+  "secondName" : "Kochetkov",
+  "location" : {
+    "locationName" : "Dead City"
+  },
+  "suit" : [ {
+    "suitName" : "SSP-99"
+  }, {
+    "suitName" : "Dawn"
+  }, {
+    "suitName" : "Mercenary"
+  } ],
+  "weapon" : [ {
+    "weaponName" : "G-36"
+  }, {
+    "weaponName" : "Beretta"
+  }, {
+    "weaponName" : "L-85"
+  } ],
+  "money" : {
+    "money" : 4295
+  },
+  "rank" : {
+    "rankName" : "Newcomer"
+  },
+  "group" : {
+    "groupName" : "Bandits"
+  }
+}, {
+  "firstName" : "Maxim",
+  "secondName" : "Tikhonov",
+  "location" : {
+    "locationName" : "Radar"
+  },
+  "suit" : [ {
+    "suitName" : "Guard"
+  }, {
+    "suitName" : "PSZ-9Md"
+  }, {
+    "suitName" : "Exo"
+  } ],
+  "weapon" : [ {
+    "weaponName" : "L-85"
+  }, {
+    "weaponName" : "L-85"
+  } ],
+  "money" : {
+    "money" : 955
+  },
+  "rank" : {
+    "rankName" : "Master"
+  },
+  "group" : {
+    "groupName" : "Military"
+  }
+}, {
+  "firstName" : "Stanislav",
+  "secondName" : "Saveliev",
+  "location" : {
+    "locationName" : "Agroprom"
+  },
+  "suit" : [ {
+    "suitName" : "Monolith"
+  } ],
+  "weapon" : [ {
+    "weaponName" : "Beretta"
+  } ],
+  "money" : {
+    "money" : 3025
+  },
+  "rank" : {
+    "rankName" : "Newcomer"
+  },
+  "group" : {
+    "groupName" : "Killers"
+  }
+}, {
+  "firstName" : "Igor",
+  "secondName" : "Melnikov",
+  "location" : {
+    "locationName" : "Agroprom"
+  },
+  "suit" : [ {
+    "suitName" : "Army"
+  }, {
+    "suitName" : "Duty"
+  } ],
+  "weapon" : [ {
+    "weaponName" : "USP"
+  }, {
+    "weaponName" : "PB"
+  } ],
+  "money" : {
+    "money" : 3870
+  },
+  "rank" : {
+    "rankName" : "Veteran"
+  },
+  "group" : {
+    "groupName" : "Freedom"
+  }
+}, {
+  "firstName" : "Igor",
+  "secondName" : "Karpov",
+  "location" : {
+    "locationName" : "Dark Valley"
+  },
+  "suit" : [ {
+    "suitName" : "Leather"
+  }, {
+    "suitName" : "SSP-99"
+  }, {
+    "suitName" : "Leather"
+  } ],
+  "weapon" : [ {
+    "weaponName" : "FN-2000"
+  }, {
+    "weaponName" : "SVD"
+  } ],
+  "money" : {
+    "money" : 1920
+  },
+  "rank" : {
+    "rankName" : "Veteran"
+  },
+  "group" : {
+    "groupName" : "Freedom"
+  }
+}, {
+  "firstName" : "Yaroslav",
+  "secondName" : "Polyanin",
+  "location" : {
+    "locationName" : "Military"
+  },
+  "suit" : [ {
+    "suitName" : "CEBA"
+  }, {
+    "suitName" : "Berill"
+  }, {
+    "suitName" : "CEBA"
+  } ],
+  "weapon" : [ {
+    "weaponName" : "USP"
+  }, {
+    "weaponName" : "L-85"
+  }, {
+    "weaponName" : "PB"
+  } ],
+  "money" : {
+    "money" : 4185
+  },
+  "rank" : {
+    "rankName" : "Experienced"
+  },
+  "group" : {
+    "groupName" : "Zombied"
+  }
+}, {
+  "firstName" : "Leonid",
+  "secondName" : "Yaroslav",
+  "location" : {
+    "locationName" : "Escape"
+  },
+  "suit" : [ {
+    "suitName" : "Army"
+  } ],
+  "weapon" : [ {
+    "weaponName" : "SVD"
+  }, {
+    "weaponName" : "AK-74u"
+  } ],
+  "money" : {
+    "money" : 4315
+  },
+  "rank" : {
+    "rankName" : "Newcomer"
+  },
+  "group" : {
+    "groupName" : "Zombied"
+  }
+}, {
+  "firstName" : "Dmitry",
+  "secondName" : "Storm",
+  "location" : {
+    "locationName" : "Radar"
+  },
+  "suit" : [ {
+    "suitName" : "PSZ-9Md"
+  }, {
+    "suitName" : "SSP-99"
+  } ],
+  "weapon" : [ {
+    "weaponName" : "PB"
+  }, {
+    "weaponName" : "FN-2000"
+  }, {
+    "weaponName" : "MP-5"
+  } ],
+  "money" : {
+    "money" : 840
+  },
+  "rank" : {
+    "rankName" : "Newcomer"
+  },
+  "group" : {
+    "groupName" : "Freedom"
+  }
+}, {
+  "firstName" : "Mark",
+  "secondName" : "Voronov",
+  "location" : {
+    "locationName" : "Agroprom"
+  },
+  "suit" : [ {
+    "suitName" : "Leather"
+  }, {
+    "suitName" : "Monolith"
+  }, {
+    "suitName" : "Exo"
+  } ],
+  "weapon" : [ {
+    "weaponName" : "PM"
+  }, {
+    "weaponName" : "Gauss"
+  } ],
+  "money" : {
+    "money" : 3555
+  },
+  "rank" : {
+    "rankName" : "Experienced"
+  },
+  "group" : {
+    "groupName" : "DOLG"
+  }
+}, {
+  "firstName" : "Andrei",
+  "secondName" : "Malyshev",
+  "location" : {
+    "locationName" : "Escape"
+  },
+  "suit" : [ {
+    "suitName" : "Berill"
+  }, {
+    "suitName" : "Berill"
+  } ],
+  "weapon" : [ {
+    "weaponName" : "MP-5"
+  }, {
+    "weaponName" : "VAL"
+  } ],
+  "money" : {
+    "money" : 1615
+  },
+  "rank" : {
+    "rankName" : "Veteran"
+  },
+  "group" : {
+    "groupName" : "Military"
+  }
+} ]
