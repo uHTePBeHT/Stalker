@@ -18,16 +18,16 @@ public class Stalker {
     private final int id;
     private final String firstName;
     private final String secondName;
-    private Location location;
-    private Suit suit;
-    private Weapon weapon;
-    private Money money;
-    private Rank rank;
-    private Group group;
+    private String location;
+    private String suit;
+    private String weapon;
+    private int money;
+    private String rank;
+    private String group;
 
 
 @JsonCreator
-    public Stalker(@JsonProperty("id") int id, @JsonProperty("firstName") String firstName, @JsonProperty("secondName") String secondName, @JsonProperty("location") Location location, @JsonProperty("suit") Suit suit, @JsonProperty("weapon") Weapon weapon, @JsonProperty("money") Money money, @JsonProperty("rank") Rank rank, @JsonProperty("group") Group group) {
+    public Stalker(@JsonProperty("id") int id, @JsonProperty("firstName") String firstName, @JsonProperty("secondName") String secondName, @JsonProperty("location") String location, @JsonProperty("suit") String suit, @JsonProperty("weapon") String weapon, @JsonProperty("money") int money, @JsonProperty("rank") String rank, @JsonProperty("group") String group) {
         this.id = id;
         this.firstName = firstName;
         this.secondName = secondName;
@@ -52,52 +52,52 @@ public class Stalker {
         return secondName;
     }
 
-    public Location getLocation() {
+    public String getLocation() {
         return location;
     }
 
-    public Suit getSuit() {
+    public String getSuit() {
         return suit;
     }
 
-    public Weapon getWeapon() {
+    public String getWeapon() {
         return weapon;
     }
 
-    public Money getMoney() {
+    public int getMoney() {
         return money;
     }
 
-    public Rank getRank() {
+    public String getRank() {
         return rank;
     }
 
-    public Group getGroup() {
+    public String getGroup() {
         return group;
     }
 
 
-    public void setLocation(Location location) {
+    public void setLocation(String location) {
         this.location = location;
     }
 
-    public void setSuit(Suit suit) {
+    public void setSuit(String suit) {
         this.suit = suit;
     }
 
-    public void setWeapon(Weapon weapon) {
+    public void setWeapon(String weapon) {
         this.weapon = weapon;
     }
 
-    public void setMoney(Money money) {
+    public void setMoney(int money) {
         this.money = money;
     }
 
-    public void setRank(Rank rank) {
+    public void setRank(String rank) {
         this.rank = rank;
     }
 
-    public void setGroup(Group group) {
+    public void setGroup(String group) {
         this.group = group;
     }
 }

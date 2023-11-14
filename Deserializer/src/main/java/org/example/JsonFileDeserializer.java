@@ -34,7 +34,8 @@ public class JsonFileDeserializer {
         if (stalkersD != null) {
             System.out.println("Deserialization success");
             for (Stalker stalker : stalkersD) {
-                System.out.println("ID: " + stalker.getId() + " Name: " + stalker.getFirstName() + " Surname: " + stalker.getSecondName());
+                System.out.println("ID: " + stalker.getId() + " Name: " + stalker.getFirstName() + " Surname: " + stalker.getSecondName()
+                + " Group: " + stalker.getGroup());
             }
         }
         System.out.println(stalkersD);

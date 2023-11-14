@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.util.List;
 
 import org.example.JsonFileDeserializer;
+import org.example.Stalker;
+
 
 public class DatabaseManager {
     private final String url;
@@ -38,12 +40,12 @@ public class DatabaseManager {
                     //preparedStatement.setInt(1, stalker.getId());
                     preparedStatement.setString(1, stalker.getFirstName());
                     preparedStatement.setString(2, stalker.getSecondName());
-                    preparedStatement.setString(3, stalker.getGroup().getGroupName());
-                    preparedStatement.setString(4, stalker.getRank().getRankName());
-                    preparedStatement.setString(5, stalker.getLocation().getLocationName());
-                    preparedStatement.setString(6, stalker.getSuit().getSuitName());
-                    preparedStatement.setString(7, stalker.getWeapon().getWeaponName());
-                    preparedStatement.setInt(8, stalker.getMoney().getMoney());
+                    preparedStatement.setString(3, stalker.getGroup());
+                    preparedStatement.setString(4, stalker.getRank());
+                    preparedStatement.setString(5, stalker.getLocation());
+                    preparedStatement.setString(6, stalker.getSuit());
+                    preparedStatement.setString(7, stalker.getWeapon());
+                    preparedStatement.setInt(8, stalker.getMoney());
 
                     preparedStatement.addBatch();
                 }
@@ -55,7 +57,6 @@ public class DatabaseManager {
     }
 
     public static void main(String[] args) {
-
         DatabaseManager databaseManager = new DatabaseManager("jdbc:postgresql://localhost:5432/stalkers", "postgres", "postgres");
         List<Stalker> stalkersA = JsonFileDeserializer.deserializeObjects("D:\\Java Projects\\Stalker\\stalkers.json");
         System.out.println(stalkersA);
