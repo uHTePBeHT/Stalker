@@ -9,6 +9,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/DatabaseManager" />
             <option value="$PROJECT_DIR$/Deserializer" />
             <option value="$PROJECT_DIR$/Generator" />
             <option value="$PROJECT_DIR$/Model" />

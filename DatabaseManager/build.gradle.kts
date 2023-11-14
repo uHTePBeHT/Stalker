@@ -12,10 +12,9 @@ repositories {
 dependencies {
     testImplementation(platform("org.junit:junit-bom:5.9.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.13.0")
     implementation(project(":Model"))
     implementation(project(":Generator"))
-    implementation("org.postgresql:postgresql:42.2.5")
+    implementation(project(":Deserializer"))
 }
 
 tasks.test {

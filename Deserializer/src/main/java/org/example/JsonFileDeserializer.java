@@ -9,6 +9,9 @@ import java.util.List;
 
 public class JsonFileDeserializer {
 
+    public static List<Stalker> stalkersD;
+
+
     public static List<Stalker> deserializeObjects(String filePath) {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
@@ -21,8 +24,12 @@ public class JsonFileDeserializer {
         }
     }
 
+    public static List<Stalker> getStalkersD() {
+        return stalkersD;
+    }
+
     public static void main(String[] args) {
-        List<Stalker> stalkersD = JsonFileDeserializer.deserializeObjects("D:\\Java Projects\\Stalker\\stalkers.json");
+        stalkersD = JsonFileDeserializer.deserializeObjects("D:\\Java Projects\\Stalker\\stalkers.json");
 
         if (stalkersD != null) {
             System.out.println("Deserialization success");
