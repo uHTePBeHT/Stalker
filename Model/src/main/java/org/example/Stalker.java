@@ -15,18 +15,20 @@ import java.util.List;
 import java.util.Random;
 
 public class Stalker {
+    private final int id;
     private final String firstName;
     private final String secondName;
     private Location location;
-    private List<Suit> suit;
-    private List<Weapon> weapon;
+    private Suit suit;
+    private Weapon weapon;
     private Money money;
     private Rank rank;
     private Group group;
 
 
 @JsonCreator
-    public Stalker(@JsonProperty("firstName") String firstName, @JsonProperty("secondName") String secondName, @JsonProperty("location") Location location, @JsonProperty("suit") List<Suit> suit, @JsonProperty("weapon") List<Weapon> weapon, @JsonProperty("money") Money money, @JsonProperty("rank") Rank rank, @JsonProperty("group") Group group) {
+    public Stalker(@JsonProperty("id") int id, @JsonProperty("firstName") String firstName, @JsonProperty("secondName") String secondName, @JsonProperty("location") Location location, @JsonProperty("suit") Suit suit, @JsonProperty("weapon") Weapon weapon, @JsonProperty("money") Money money, @JsonProperty("rank") Rank rank, @JsonProperty("group") Group group) {
+        this.id = id;
         this.firstName = firstName;
         this.secondName = secondName;
         this.location = location;
@@ -39,6 +41,9 @@ public class Stalker {
 
 
 
+    public int getId() {
+        return id;
+    }
     public String getFirstName() {
         return firstName;
     }
@@ -51,11 +56,11 @@ public class Stalker {
         return location;
     }
 
-    public List<Suit> getSuit() {
+    public Suit getSuit() {
         return suit;
     }
 
-    public List<Weapon> getWeapon() {
+    public Weapon getWeapon() {
         return weapon;
     }
 
@@ -76,11 +81,11 @@ public class Stalker {
         this.location = location;
     }
 
-    public void setSuit(List<Suit> suit) {
+    public void setSuit(Suit suit) {
         this.suit = suit;
     }
 
-    public void setWeapon(List<Weapon> weapon) {
+    public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
     }
 

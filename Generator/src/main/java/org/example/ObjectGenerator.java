@@ -76,7 +76,12 @@ public class ObjectGenerator {
         return rank;
     }
 
-    private static List<Suit> generateSuit() {
+    private static Suit generateSuit() {
+        Suit suit = new Suit(Suit.getSuits()[random.nextInt(Suit.getSuits().length)]);
+        return suit;
+    }
+
+    private static List<Suit> generateSuits() {
         int randNum = random.nextInt(3) + 1;
         List<Suit> stalkerSuit = new ArrayList<>();
         for (int i = 0; i < randNum; i++) {
@@ -86,7 +91,13 @@ public class ObjectGenerator {
         return stalkerSuit;
     }
 
-    private static List<Weapon> generateWeapon() {
+    private static Weapon generateWeapon() {
+        Weapon weapon = new Weapon(Weapon.getWeapons()[random.nextInt(Weapon.getWeapons().length)]);
+        return weapon;
+    }
+
+
+    private static List<Weapon> generateWeapons() {
         int randNum = random.nextInt(3) + 1;
         List<Weapon> stalkerWeapon = new ArrayList<>();
         for (int i = 0; i < randNum; i++) {
