@@ -15,7 +15,6 @@ dependencies {
     implementation("com.fasterxml.jackson.core:jackson-databind:2.13.0")
     implementation(project(":Model"))
     implementation(project(":Generator"))
-    implementation("org.postgresql:postgresql:42.2.5")
 }
 
 tasks.test {

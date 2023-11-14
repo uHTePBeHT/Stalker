@@ -2,8 +2,8 @@ package org.example;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import org.example.stalker.bio.Fname;
-import org.example.stalker.bio.Sname;
+//import org.example.stalker.bio.Fname;
+//import org.example.stalker.bio.Sname;
 import org.example.stalker.info.Group;
 import org.example.stalker.info.Location;
 import org.example.stalker.info.Rank;

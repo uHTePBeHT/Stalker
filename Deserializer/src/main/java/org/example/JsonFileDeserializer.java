@@ -37,5 +37,6 @@ public class JsonFileDeserializer {
                 System.out.println("ID: " + stalker.getId() + " Name: " + stalker.getFirstName() + " Surname: " + stalker.getSecondName());
             }
         }
+        System.out.println(stalkersD);
     }
 }
