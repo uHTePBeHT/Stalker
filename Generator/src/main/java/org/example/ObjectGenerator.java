@@ -38,7 +38,7 @@ public class ObjectGenerator {
     public static List<Stalker> generateStalkerList(int count) {
         List<Stalker> stalkers = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            Stalker stalker = new Stalker(generateFirstName(), generateSecondName(), generateLocation(),
+            Stalker stalker = new Stalker(i + 1, generateFirstName(), generateSecondName(), generateLocation(),
                     generateSuit(), generateWeapon(), generateMoney(), generateRank(), generateGroup());
             stalkers.add(stalker);
         }
