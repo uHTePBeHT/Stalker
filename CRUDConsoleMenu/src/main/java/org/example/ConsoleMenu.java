@@ -388,7 +388,10 @@ public class ConsoleMenu {
         System.out.print("Введите ID оружия сталкера: ");
         int weaponId = scanner.nextInt();
 
-        stalkerCrud.createStalker(firstName, secondName, groupId, rankId, locationId, suitId, weaponId);
+        System.out.print("Введите деньги сталкера: ");
+        int money = scanner.nextInt();
+
+        stalkerCrud.createStalker(firstName, secondName, groupId, rankId, locationId, suitId, weaponId, money);
     }
 
     private static void getStalkerId(Scanner scanner, StalkerCrud stalkerCrud) {
@@ -407,7 +410,7 @@ public class ConsoleMenu {
     private static void updateStalker(Scanner scanner, StalkerCrud stalkerCrud) {
         System.out.print("Введите ID сталкера для обновления: ");
         int stalkerIdToUpdate = scanner.nextInt();
-        scanner.nextLine(); // Consume the newline
+        scanner.nextLine();
 
         System.out.print("Введите новое имя сталкера: ");
         String newFirstName = scanner.nextLine();
@@ -430,7 +433,10 @@ public class ConsoleMenu {
         System.out.print("Введите новый ID оружия сталкера: ");
         int newWeaponId = scanner.nextInt();
 
-        stalkerCrud.updateStalker(stalkerIdToUpdate, newFirstName, newSecondName, newGroupId, newRankId, newLocationId, newSuitId, newWeaponId);
+        System.out.print("Введите новое количество денег сталкера: ");
+        int newMoney = scanner.nextInt();
+
+        stalkerCrud.updateStalker(stalkerIdToUpdate, newFirstName, newSecondName, newGroupId, newRankId, newLocationId, newSuitId, newWeaponId, newMoney);
     }
 
     private static void deleteStalker(Scanner scanner, StalkerCrud stalkerCrud) {

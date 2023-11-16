@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 public class StalkerCrud {
 
@@ -25,7 +26,7 @@ public class StalkerCrud {
     }
 
     public void createStalker(String firstName, String secondName, int groupId, int rankId,
-                              int locationId, int suitId, int weaponId) {
+                              int locationId, int suitId, int weaponId, int money) {
         try {
             // Проверяем, существуют ли переданные groupId, rankId, locationId, suitId, weaponId
             if (!groupDataCrud.groupExists(groupId) ||
@@ -37,7 +38,7 @@ public class StalkerCrud {
                 return;
             }
 
-            String sql = "INSERT INTO stalker (first_name, second_name, group_id, rank_id, location_id, suit_id, weapon_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO stalker (first_name, second_name, group_id, rank_id, location_id, suit_id, weapon_id, money) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
                 statement.setString(1, firstName);
                 statement.setString(2, secondName);
@@ -46,6 +47,7 @@ public class StalkerCrud {
                 statement.setInt(5, locationId);
                 statement.setInt(6, suitId);
                 statement.setInt(7, weaponId);
+                statement.setInt(8, money);
 
                 int affectedRows = statement.executeUpdate();
                 if (affectedRows == 0) {
@@ -81,7 +83,7 @@ public class StalkerCrud {
     }
 
     public void updateStalker(int stalkerId, String firstName, String secondName,
-                              int groupId, int rankId, int locationId, int suitId, int weaponId) {
+                              int groupId, int rankId, int locationId, int suitId, int weaponId, int money) {
         try {
             // Проверяем, существуют ли переданные groupId, rankId, locationId, suitId, weaponId
             if (!groupDataCrud.groupExists(groupId) ||
@@ -93,7 +95,7 @@ public class StalkerCrud {
                 return;
             }
 
-            String sql = "UPDATE stalker SET first_name = ?, second_name = ?, group_id = ?, rank_id = ?, location_id = ?, suit_id = ?, weapon_id = ? WHERE stalker_id = ?";
+            String sql = "UPDATE stalker SET first_name = ?, second_name = ?, group_id = ?, rank_id = ?, location_id = ?, suit_id = ?, weapon_id = ?, money = ? WHERE stalker_id = ?";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setString(1, firstName);
                 statement.setString(2, secondName);
@@ -103,6 +105,7 @@ public class StalkerCrud {
                 statement.setInt(6, suitId);
                 statement.setInt(7, weaponId);
                 statement.setInt(8, stalkerId);
+                statement.setInt(9, money);
 
                 int affectedRows = statement.executeUpdate();
                 if (affectedRows == 0) {
@@ -133,4 +136,11 @@ public class StalkerCrud {
             e.printStackTrace();
         }
     }
+
+    public int enterMoneyFromConsole() {
+        System.out.print("Введите количество денег для сталкера: ");
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextInt();
+    }
+
 }
