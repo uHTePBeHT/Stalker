@@ -186,11 +186,11 @@
             DatabaseManager databaseManager = new DatabaseManager("jdbc:postgresql://localhost:5432/stalkers_db", "postgres", "postgres");
             List<Stalker> stalkersA = JsonFileDeserializer.deserializeObjects("D:\\Java Projects\\Stalker\\stalkers.json");
             System.out.println(stalkersA);
-            /*databaseManager.insertGroups(Group.getGroups());
+            databaseManager.insertGroups(Group.getGroups());
             databaseManager.insertRanks(Rank.getRanks());
             databaseManager.insertLocations(Location.getLocations());
             databaseManager.insertSuits(Suit.getSuits());
-            databaseManager.insertWeapons(Weapon.getWeapons());*/
+            databaseManager.insertWeapons(Weapon.getWeapons());
             databaseManager.insertStalkers(stalkersA);
         }
     }

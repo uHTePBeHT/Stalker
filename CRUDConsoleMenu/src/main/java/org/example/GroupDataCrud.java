@@ -34,7 +34,7 @@ public class GroupDataCrud {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return -1; // Return -1 if not found (handle this appropriately in your application)
+        return -1;
     }
 
     public void updateGroup(int groupId, String newGroupName) {

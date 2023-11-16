@@ -83,7 +83,7 @@ public class ConsoleMenu {
 
             System.out.print("Ваш выбор: ");
             choice = scanner.nextInt();
-            scanner.nextLine(); // Consume the newline
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
@@ -101,7 +101,7 @@ public class ConsoleMenu {
                 case 3:
                     System.out.print("Введите ID группы для обновления: ");
                     int groupIdToUpdate = scanner.nextInt();
-                    scanner.nextLine(); // Consume the newline
+                    scanner.nextLine();
                     System.out.print("Введите новое название группы: ");
                     String newGroupName = scanner.nextLine();
                     groupDataCrud.updateGroup(groupIdToUpdate, newGroupName);
@@ -135,7 +135,7 @@ public class ConsoleMenu {
 
             System.out.print("Ваш выбор: ");
             choice = scanner.nextInt();
-            scanner.nextLine(); // Consume the newline
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
@@ -153,7 +153,7 @@ public class ConsoleMenu {
                 case 3:
                     System.out.print("Введите ID ранга для обновления: ");
                     int rankIdToUpdate = scanner.nextInt();
-                    scanner.nextLine(); // Consume the newline
+                    scanner.nextLine();
                     System.out.print("Введите новое название ранга: ");
                     String newRankName = scanner.nextLine();
                     rankCrud.updateRank(rankIdToUpdate, newRankName);
@@ -186,7 +186,7 @@ public class ConsoleMenu {
 
             System.out.print("Ваш выбор: ");
             choice = scanner.nextInt();
-            scanner.nextLine(); // Consume the newline
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
@@ -204,7 +204,7 @@ public class ConsoleMenu {
                 case 3:
                     System.out.print("Введите ID локации для обновления: ");
                     int locationIdToUpdate = scanner.nextInt();
-                    scanner.nextLine(); // Consume the newline
+                    scanner.nextLine();
                     System.out.print("Введите новое название локации: ");
                     String newLocationName = scanner.nextLine();
                     locationCrud.updateLocation(locationIdToUpdate, newLocationName);
@@ -238,7 +238,7 @@ public class ConsoleMenu {
 
             System.out.print("Ваш выбор: ");
             choice = scanner.nextInt();
-            scanner.nextLine(); // Consume the newline
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
@@ -256,7 +256,7 @@ public class ConsoleMenu {
                 case 3:
                     System.out.print("Введите ID костюма для обновления: ");
                     int suitIdToUpdate = scanner.nextInt();
-                    scanner.nextLine(); // Consume the newline
+                    scanner.nextLine();
                     System.out.print("Введите новое название костюма: ");
                     String newSuitName = scanner.nextLine();
                     suitCrud.updateSuit(suitIdToUpdate, newSuitName);
@@ -290,7 +290,7 @@ public class ConsoleMenu {
 
             System.out.print("Ваш выбор: ");
             choice = scanner.nextInt();
-            scanner.nextLine(); // Consume the newline
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:
@@ -308,7 +308,7 @@ public class ConsoleMenu {
                 case 3:
                     System.out.print("Введите ID оружия для обновления: ");
                     int weaponIdToUpdate = scanner.nextInt();
-                    scanner.nextLine(); // Consume the newline
+                    scanner.nextLine();
                     System.out.print("Введите новое название оружия: ");
                     String newWeaponName = scanner.nextLine();
                     weaponCrud.updateWeapon(weaponIdToUpdate, newWeaponName);
@@ -342,7 +342,7 @@ public class ConsoleMenu {
 
             System.out.print("Ваш выбор: ");
             choice = scanner.nextInt();
-            scanner.nextLine(); // Consume the newline
+            scanner.nextLine();
 
             switch (choice) {
                 case 1:

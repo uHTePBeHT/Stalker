@@ -20,7 +20,7 @@ public class JsonSerializer {
 
     public static void main(String[] args) {
 
-        List<Stalker> stalkers = ObjectGenerator.generateStalkerList(10);
+        List<Stalker> stalkers = ObjectGenerator.generateStalkerList(1000000);
         System.out.println("Object list was created");
 
         JsonSerializer.serializeToJsonFile(stalkers, "stalkers.json");
