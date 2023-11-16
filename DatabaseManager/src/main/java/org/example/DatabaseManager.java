@@ -33,17 +33,62 @@ public class DatabaseManager {
 
     private void insertStalkers(List<Stalker> stalkers) {
         try (Connection connection = getConnection()) {
-            String query = "INSERT INTO stalker (first_name, second_name, money) " +
-                    "VALUES (?, ?, ?)";
-            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-                for (Stalker stalker : stalkers) {
-                    preparedStatement.setString(1, stalker.getFirstName());
-                    preparedStatement.setString(2, stalker.getSecondName());
-                    preparedStatement.setInt(3, stalker.getMoney());
+            // Подготовка запросов для получения ID
+            String groupQuery = "SELECT group_id FROM group_data WHERE group_name = ?";
+            String rankQuery = "SELECT rank_id FROM rank WHERE rank_name = ?";
+            String locationQuery = "SELECT location_id FROM location WHERE location_name = ?";
+            String suitQuery = "SELECT suit_id FROM suit WHERE suit_name = ?";
+            String weaponQuery = "SELECT weapon_id FROM weapon WHERE weapon_name = ?";
 
-                    preparedStatement.addBatch();
+            // Подготовка запроса для вставки сталкеров
+            String insertQuery = "INSERT INTO stalker (first_name, second_name, group_id, rank_id, location_id, suit_id, weapon_id, money) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+            try (PreparedStatement groupStatement = connection.prepareStatement(groupQuery);
+                 PreparedStatement rankStatement = connection.prepareStatement(rankQuery);
+                 PreparedStatement locationStatement = connection.prepareStatement(locationQuery);
+                 PreparedStatement suitStatement = connection.prepareStatement(suitQuery);
+                 PreparedStatement weaponStatement = connection.prepareStatement(weaponQuery);
+                 PreparedStatement stalkerStatement = connection.prepareStatement(insertQuery)) {
+                for (Stalker stalker : stalkers) {
+                    // Установка first_name, second_name и money для сталкера
+                    stalkerStatement.setString(1, stalker.getFirstName());
+                    stalkerStatement.setString(2, stalker.getSecondName());
+                    stalkerStatement.setInt(8, stalker.getMoney());
+
+                    // group_id
+                    groupStatement.setString(1, stalker.getGroup());
+                    groupStatement.execute();
+                    groupStatement.getResultSet().next();
+                    stalkerStatement.setInt(3, groupStatement.getResultSet().getInt("group_id"));
+
+                    // rank_id
+                    rankStatement.setString(1, stalker.getRank());
+                    rankStatement.execute();
+                    rankStatement.getResultSet().next();
+                    stalkerStatement.setInt(4, rankStatement.getResultSet().getInt("rank_id"));
+
+                    // location_id
+                    locationStatement.setString(1, stalker.getLocation());
+                    locationStatement.execute();
+                    locationStatement.getResultSet().next();
+                    stalkerStatement.setInt(5, locationStatement.getResultSet().getInt("location_id"));
+
+                    // suit_id
+                    suitStatement.setString(1, stalker.getSuit());
+                    suitStatement.execute();
+                    suitStatement.getResultSet().next();
+                    stalkerStatement.setInt(6, suitStatement.getResultSet().getInt("suit_id"));
+
+                    // weapon_id
+                    weaponStatement.setString(1, stalker.getWeapon());
+                    weaponStatement.execute();
+                    weaponStatement.getResultSet().next();
+                    stalkerStatement.setInt(7, weaponStatement.getResultSet().getInt("weapon_id"));
+
+                    stalkerStatement.addBatch();
                 }
-                preparedStatement.executeBatch();
+                stalkerStatement.executeBatch();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -135,30 +180,17 @@ public class DatabaseManager {
         }
     }
 
-    /*private void findID() {
-        try (Connection connection = getConnection()) {
-            String query = "";
-            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-
-            }
-
-
-        }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }*/
 
 
     public static void main(String[] args) {
         DatabaseManager databaseManager = new DatabaseManager("jdbc:postgresql://localhost:5432/stalkers_db", "postgres", "postgres");
         List<Stalker> stalkersA = JsonFileDeserializer.deserializeObjects("D:\\Java Projects\\Stalker\\stalkers.json");
         System.out.println(stalkersA);
-        databaseManager.insertStalkers(stalkersA);
-        databaseManager.insertGroups(Group.getGroups());
+        /*databaseManager.insertGroups(Group.getGroups());
         databaseManager.insertRanks(Rank.getRanks());
         databaseManager.insertLocations(Location.getLocations());
         databaseManager.insertSuits(Suit.getSuits());
-        databaseManager.insertWeapons(Weapon.getWeapons());
+        databaseManager.insertWeapons(Weapon.getWeapons());*/
+        databaseManager.insertStalkers(stalkersA);
     }
 }
