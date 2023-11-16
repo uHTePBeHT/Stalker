@@ -59,4 +59,19 @@ public class WeaponCrud {
             e.printStackTrace();
         }
     }
+
+    public boolean weaponExists(int weaponId) {
+        try {
+            String sql = "SELECT 1 FROM weapon WHERE weapon_id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setInt(1, weaponId);
+
+                ResultSet resultSet = statement.executeQuery();
+                return resultSet.next(); // Вернет true, если ранг существует
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

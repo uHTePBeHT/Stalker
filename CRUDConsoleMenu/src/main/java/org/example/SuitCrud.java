@@ -58,4 +58,19 @@ public class SuitCrud {
             e.printStackTrace();
         }
     }
+
+    public boolean suitExists(int suitId) {
+        try {
+            String sql = "SELECT 1 FROM suit WHERE suit_id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setInt(1, suitId);
+
+                ResultSet resultSet = statement.executeQuery();
+                return resultSet.next(); // Вернет true, если ранг существует
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

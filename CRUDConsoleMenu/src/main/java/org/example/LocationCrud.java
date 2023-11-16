@@ -59,4 +59,19 @@ public class LocationCrud {
             e.printStackTrace();
         }
     }
+
+    public boolean locationExists(int locationId) {
+        try {
+            String sql = "SELECT 1 FROM location WHERE location_id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setInt(1, locationId);
+
+                ResultSet resultSet = statement.executeQuery();
+                return resultSet.next(); // Вернет true, если ранг существует
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

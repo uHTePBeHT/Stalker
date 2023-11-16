@@ -57,4 +57,19 @@ public class GroupDataCrud {
             e.printStackTrace();
         }
     }
+    public boolean groupExists(int groupId) {
+        try {
+            String sql = "SELECT 1 FROM group_data WHERE group_id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setInt(1, groupId);
+
+                ResultSet resultSet = statement.executeQuery();
+                return resultSet.next(); // Вернет true, если группа существует
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }

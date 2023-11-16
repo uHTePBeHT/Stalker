@@ -57,4 +57,19 @@ public class RankCrud {
             e.printStackTrace();
         }
     }
+
+    public boolean rankExists(int rankId) {
+        try {
+            String sql = "SELECT 1 FROM rank WHERE rank_id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setInt(1, rankId);
+
+                ResultSet resultSet = statement.executeQuery();
+                return resultSet.next(); // Вернет true, если ранг существует
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
