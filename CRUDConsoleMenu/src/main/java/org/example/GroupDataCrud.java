@@ -72,4 +72,21 @@ public class GroupDataCrud {
         }
     }
 
+    public void displayAllGroups() {
+        String query = "SELECT * FROM group_data";
+        try (PreparedStatement statement = connection.prepareStatement(query);
+             ResultSet resultSet = statement.executeQuery(query)) {
+            System.out.println("Список всех групп:");
+
+            while (resultSet.next()) {
+                int groupId = resultSet.getInt("group_id");
+                String groupName = resultSet.getString("group_name");
+
+                System.out.println("ID: " + groupId + ", Название: " + groupName);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

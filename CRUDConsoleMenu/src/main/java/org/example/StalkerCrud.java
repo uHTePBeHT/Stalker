@@ -2,6 +2,7 @@ package org.example;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class StalkerCrud {
@@ -23,7 +24,7 @@ public class StalkerCrud {
         this.weaponCrud = weaponCrud;
     }
 
-    public void createStalker(String firstName, String lastName, int groupId, int rankId,
+    public void createStalker(String firstName, String secondName, int groupId, int rankId,
                               int locationId, int suitId, int weaponId) {
         try {
             // Проверяем, существуют ли переданные groupId, rankId, locationId, suitId, weaponId
@@ -36,10 +37,10 @@ public class StalkerCrud {
                 return;
             }
 
-            String sql = "INSERT INTO stalker (first_name, last_name, group_id, rank_id, location_id, suit_id, weapon_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
-            try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            String sql = "INSERT INTO stalker (first_name, second_name, group_id, rank_id, location_id, suit_id, weapon_id) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            try (PreparedStatement statement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
                 statement.setString(1, firstName);
-                statement.setString(2, lastName);
+                statement.setString(2, secondName);
                 statement.setInt(3, groupId);
                 statement.setInt(4, rankId);
                 statement.setInt(5, locationId);
@@ -58,12 +59,12 @@ public class StalkerCrud {
         }
     }
 
-    public int getStalkerId(String firstName, String lastName) {
+    public int getStalkerId(String firstName, String secondName) {
         try {
-            String sql = "SELECT stalker_id FROM stalker WHERE first_name = ? AND last_name = ?";
+            String sql = "SELECT stalker_id FROM stalker WHERE first_name = ? AND second_name = ?";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setString(1, firstName);
-                statement.setString(2, lastName);
+                statement.setString(2, secondName);
 
                 ResultSet resultSet = statement.executeQuery();
                 if (resultSet.next()) {
@@ -79,7 +80,7 @@ public class StalkerCrud {
         }
     }
 
-    public void updateStalker(int stalkerId, String firstName, String lastName,
+    public void updateStalker(int stalkerId, String firstName, String secondName,
                               int groupId, int rankId, int locationId, int suitId, int weaponId) {
         try {
             // Проверяем, существуют ли переданные groupId, rankId, locationId, suitId, weaponId
@@ -92,10 +93,10 @@ public class StalkerCrud {
                 return;
             }
 
-            String sql = "UPDATE stalker SET first_name = ?, last_name = ?, group_id = ?, rank_id = ?, location_id = ?, suit_id = ?, weapon_id = ? WHERE stalker_id = ?";
+            String sql = "UPDATE stalker SET first_name = ?, second_name = ?, group_id = ?, rank_id = ?, location_id = ?, suit_id = ?, weapon_id = ? WHERE stalker_id = ?";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setString(1, firstName);
-                statement.setString(2, lastName);
+                statement.setString(2, secondName);
                 statement.setInt(3, groupId);
                 statement.setInt(4, rankId);
                 statement.setInt(5, locationId);

@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Scanner;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class ConsoleMenu {
     private static final String URL = "jdbc:postgresql://localhost:5432/stalkers_db";
@@ -17,6 +19,7 @@ public class ConsoleMenu {
             LocationCrud locationCrud = new LocationCrud(connection);
             SuitCrud suitCrud = new SuitCrud(connection);
             WeaponCrud weaponCrud = new WeaponCrud(connection);
+            StalkerCrud stalkerCrud = new StalkerCrud(connection, groupDataCrud, rankCrud, locationCrud, suitCrud, weaponCrud);
 
             Scanner scanner = new Scanner(System.in);
             int choice;
@@ -28,11 +31,12 @@ public class ConsoleMenu {
                 System.out.println("3. Location");
                 System.out.println("4. Suit");
                 System.out.println("5. Weapon");
+                System.out.println("6. Stalker");
                 System.out.println("0. Выход");
 
                 System.out.print("Ваш выбор: ");
                 choice = scanner.nextInt();
-                scanner.nextLine(); // Consume the newline
+                scanner.nextLine();
 
                 switch (choice) {
                     case 1:
@@ -49,6 +53,9 @@ public class ConsoleMenu {
                         break;
                     case 5:
                         performWeaponOperations(scanner, weaponCrud);
+                        break;
+                    case 6:
+                        performStalkerOperations(scanner, stalkerCrud);
                         break;
                     case 0:
                         System.out.println("Выход из программы.");
@@ -320,5 +327,116 @@ public class ConsoleMenu {
                     System.out.println("Неверный выбор. Пожалуйста, выберите снова.");
             }
         } while (choice != 0);
+    }
+
+    private static void performStalkerOperations(Scanner scanner, StalkerCrud stalkerCrud) {
+        int choice;
+
+        do {
+            System.out.println("Операции со сталкером:");
+            System.out.println("1. Создать сталкера");
+            System.out.println("2. Получить ID сталкера");
+            System.out.println("3. Обновить сталкера");
+            System.out.println("4. Удалить сталкера");
+            System.out.println("0. Вернуться в предыдущее меню");
+
+            System.out.print("Ваш выбор: ");
+            choice = scanner.nextInt();
+            scanner.nextLine(); // Consume the newline
+
+            switch (choice) {
+                case 1:
+                    createStalker(scanner, stalkerCrud);
+                    break;
+                case 2:
+                    getStalkerId(scanner, stalkerCrud);
+                    break;
+                case 3:
+                    updateStalker(scanner, stalkerCrud);
+                    break;
+                case 4:
+                    deleteStalker(scanner, stalkerCrud);
+                    break;
+                case 0:
+                    System.out.println("Возвращение в предыдущее меню.");
+                    break;
+                default:
+                    System.out.println("Неверный выбор. Пожалуйста, выберите снова.");
+            }
+        } while (choice != 0);
+    }
+
+    private static void createStalker(Scanner scanner, StalkerCrud stalkerCrud) {
+        System.out.print("Введите имя сталкера: ");
+        String firstName = scanner.nextLine();
+
+        System.out.print("Введите фамилию сталкера: ");
+        String secondName = scanner.nextLine();
+
+        System.out.print("Введите ID группы сталкера: ");
+        int groupId = scanner.nextInt();
+
+        System.out.print("Введите ID ранга сталкера: ");
+        int rankId = scanner.nextInt();
+
+        System.out.print("Введите ID локации сталкера: ");
+        int locationId = scanner.nextInt();
+
+        System.out.print("Введите ID костюма сталкера: ");
+        int suitId = scanner.nextInt();
+
+        System.out.print("Введите ID оружия сталкера: ");
+        int weaponId = scanner.nextInt();
+
+        stalkerCrud.createStalker(firstName, secondName, groupId, rankId, locationId, suitId, weaponId);
+    }
+
+    private static void getStalkerId(Scanner scanner, StalkerCrud stalkerCrud) {
+        System.out.print("Введите имя сталкера: ");
+        String firstName = scanner.nextLine();
+
+        System.out.print("Введите фамилию сталкера: ");
+        String secondName = scanner.nextLine();
+
+        int stalkerId = stalkerCrud.getStalkerId(firstName, secondName);
+        if (stalkerId != -1) {
+            System.out.println("ID сталкера: " + stalkerId);
+        }
+    }
+
+    private static void updateStalker(Scanner scanner, StalkerCrud stalkerCrud) {
+        System.out.print("Введите ID сталкера для обновления: ");
+        int stalkerIdToUpdate = scanner.nextInt();
+        scanner.nextLine(); // Consume the newline
+
+        System.out.print("Введите новое имя сталкера: ");
+        String newFirstName = scanner.nextLine();
+
+        System.out.print("Введите новую фамилию сталкера: ");
+        String newSecondName = scanner.nextLine();
+
+        System.out.print("Введите новый ID группы сталкера: ");
+        int newGroupId = scanner.nextInt();
+
+        System.out.print("Введите новый ID ранга сталкера: ");
+        int newRankId = scanner.nextInt();
+
+        System.out.print("Введите новый ID локации сталкера: ");
+        int newLocationId = scanner.nextInt();
+
+        System.out.print("Введите новый ID костюма сталкера: ");
+        int newSuitId = scanner.nextInt();
+
+        System.out.print("Введите новый ID оружия сталкера: ");
+        int newWeaponId = scanner.nextInt();
+
+        stalkerCrud.updateStalker(stalkerIdToUpdate, newFirstName, newSecondName, newGroupId, newRankId, newLocationId, newSuitId, newWeaponId);
+    }
+
+    private static void deleteStalker(Scanner scanner, StalkerCrud stalkerCrud) {
+        System.out.print("Введите ID сталкера для удаления: ");
+        int stalkerIdToDelete = scanner.nextInt();
+
+        stalkerCrud.deleteStalker(stalkerIdToDelete);
     }
 }
