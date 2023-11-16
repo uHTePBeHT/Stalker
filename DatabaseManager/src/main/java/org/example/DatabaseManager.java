@@ -9,6 +9,11 @@ import java.util.List;
 
 import org.example.JsonFileDeserializer;
 import org.example.Stalker;
+import org.example.stalker.info.Group;
+import org.example.stalker.info.Location;
+import org.example.stalker.info.Rank;
+import org.example.stalker.inventory.Suit;
+import org.example.stalker.inventory.Weapon;
 
 
 public class DatabaseManager {
@@ -22,30 +27,19 @@ public class DatabaseManager {
         this.password = password;
     }
 
-    public Connection getConnection() throws SQLException {
+    private Connection getConnection() throws SQLException {
         return DriverManager.getConnection(url, user, password);
     }
 
-    public void insertStalkers(List<Stalker> stalkers) {
-        if (stalkers == null) {
-            System.err.println("Ошибка: Список stalkers равен null.");
-            // Возможно, стоит зарегистрировать ошибку или обработать ее иным образом в зависимости от требований вашего приложения.
-            System.exit(1); // Завершить программу с кодом ошибки.
-        }
+    private void insertStalkers(List<Stalker> stalkers) {
         try (Connection connection = getConnection()) {
-            String query = "INSERT INTO stalkers (first_name, second_name, group_name, rank, location, suit, weapon, money) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO stalker (first_name, second_name, money) " +
+                    "VALUES (?, ?, ?)";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 for (Stalker stalker : stalkers) {
-                    //preparedStatement.setInt(1, stalker.getId());
                     preparedStatement.setString(1, stalker.getFirstName());
                     preparedStatement.setString(2, stalker.getSecondName());
-                    preparedStatement.setString(3, stalker.getGroup());
-                    preparedStatement.setString(4, stalker.getRank());
-                    preparedStatement.setString(5, stalker.getLocation());
-                    preparedStatement.setString(6, stalker.getSuit());
-                    preparedStatement.setString(7, stalker.getWeapon());
-                    preparedStatement.setInt(8, stalker.getMoney());
+                    preparedStatement.setInt(3, stalker.getMoney());
 
                     preparedStatement.addBatch();
                 }
@@ -56,10 +50,115 @@ public class DatabaseManager {
         }
     }
 
+    private void insertGroups(String[] groups) {
+        try (Connection connection = getConnection()) {
+            String query = "INSERT INTO group_data (group_name) " +
+                    "VALUES (?)";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                for (String group : groups) {
+                    preparedStatement.setString(1, group);
+
+                    preparedStatement.addBatch();
+                }
+                preparedStatement.executeBatch();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void insertRanks(String[] ranks) {
+        try (Connection connection = getConnection()) {
+            String query = "INSERT INTO rank (rank_name) " +
+                    "VALUES (?)";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                for (String rank : ranks) {
+                    preparedStatement.setString(1, rank);
+
+                    preparedStatement.addBatch();
+                }
+                preparedStatement.executeBatch();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void insertLocations(String[] locations) {
+        try (Connection connection = getConnection()) {
+            String query = "INSERT INTO location (location_name) " +
+                    "VALUES (?)";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                for (String location : locations) {
+                    preparedStatement.setString(1, location);
+
+                    preparedStatement.addBatch();
+                }
+                preparedStatement.executeBatch();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void insertSuits(String[] suits) {
+        try (Connection connection = getConnection()) {
+            String query = "INSERT INTO suit (suit_name) " +
+                    "VALUES (?)";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                for (String suit : suits) {
+                    preparedStatement.setString(1, suit);
+
+                    preparedStatement.addBatch();
+                }
+                preparedStatement.executeBatch();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void insertWeapons(String[] weapons) {
+        try (Connection connection = getConnection()) {
+            String query = "INSERT INTO weapon (weapon_name) " +
+                    "VALUES (?)";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+                for (String weapon : weapons) {
+                    preparedStatement.setString(1, weapon);
+
+                    preparedStatement.addBatch();
+                }
+                preparedStatement.executeBatch();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /*private void findID() {
+        try (Connection connection = getConnection()) {
+            String query = "";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
+            }
+
+
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }*/
+
+
     public static void main(String[] args) {
-        DatabaseManager databaseManager = new DatabaseManager("jdbc:postgresql://localhost:5432/stalkers", "postgres", "postgres");
+        DatabaseManager databaseManager = new DatabaseManager("jdbc:postgresql://localhost:5432/stalkers_db", "postgres", "postgres");
         List<Stalker> stalkersA = JsonFileDeserializer.deserializeObjects("D:\\Java Projects\\Stalker\\stalkers.json");
         System.out.println(stalkersA);
         databaseManager.insertStalkers(stalkersA);
+        databaseManager.insertGroups(Group.getGroups());
+        databaseManager.insertRanks(Rank.getRanks());
+        databaseManager.insertLocations(Location.getLocations());
+        databaseManager.insertSuits(Suit.getSuits());
+        databaseManager.insertWeapons(Weapon.getWeapons());
     }
 }
