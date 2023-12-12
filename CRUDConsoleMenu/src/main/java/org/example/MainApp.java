@@ -9,13 +9,10 @@ import java.sql.SQLException;
 public class MainApp extends HttpServlet {
     public static void main(String[] args) {
         try {
-            // Создаем экземпляр Tomcat
             Tomcat tomcat = new Tomcat();
 
-            // Устанавливаем порт, на котором будет работать Tomcat
             tomcat.setPort(8080);
 
-            // Создаем контекст для нашего приложения
             Context context = tomcat.addContext("/", System.getProperty("java.io.tmpdir"));
 
             // Создаем экземпляры классов для работы с базой данных
@@ -35,7 +32,6 @@ public class MainApp extends HttpServlet {
             tomcat.addServlet("/", "WeaponServlet", new WeaponServlet(weaponCrud)).setLoadOnStartup(1);
             tomcat.addServlet("/", "StalkerServlet", new StalkerServlet(stalkerCrud)).setLoadOnStartup(1);
 
-            // Map the servlets to URL patterns
             context.addServletMappingDecoded("/groupData", "GroupDataServlet");
             context.addServletMappingDecoded("/rank", "RankServlet");
             context.addServletMappingDecoded("/location", "LocationServlet");
@@ -43,7 +39,7 @@ public class MainApp extends HttpServlet {
             context.addServletMappingDecoded("/weapon", "WeaponServlet");
             context.addServletMappingDecoded("/stalker", "StalkerServlet");
 
-            // Запускаем Tomcat
+
             tomcat.start();
             tomcat.getServer().await();
         } catch (LifecycleException e) {

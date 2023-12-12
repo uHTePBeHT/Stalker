@@ -20,7 +20,6 @@ public class StalkerServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         PrintWriter out = response.getWriter();
 
-        // Получаем параметры из запроса
         String firstName = request.getParameter("firstName");
         String secondName = request.getParameter("secondName");
         int groupId = Integer.parseInt(request.getParameter("groupId"));
@@ -30,17 +29,14 @@ public class StalkerServlet extends HttpServlet {
         int weaponId = Integer.parseInt(request.getParameter("weaponId"));
         int money = Integer.parseInt(request.getParameter("money"));
 
-        // Вызываем метод создания сталкера
         stalkerCrud.createStalker(firstName, secondName, groupId, rankId, locationId, suitId, weaponId, money);
 
-        // Возвращаем ответ клиенту
         out.println("Сталкер успешно создан.");
     }
 
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws IOException {
         PrintWriter out = response.getWriter();
 
-        // Получаем параметры из запроса
         int stalkerId = Integer.parseInt(request.getParameter("stalkerId"));
         String firstName = request.getParameter("firstName");
         String secondName = request.getParameter("secondName");
@@ -51,23 +47,41 @@ public class StalkerServlet extends HttpServlet {
         int weaponId = Integer.parseInt(request.getParameter("weaponId"));
         int money = Integer.parseInt(request.getParameter("money"));
 
-        // Вызываем метод обновления сталкера
         stalkerCrud.updateStalker(stalkerId, firstName, secondName, groupId, rankId, locationId, suitId, weaponId, money);
 
-        // Возвращаем ответ клиенту
         out.println("Сталкер успешно обновлен.");
     }
 
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
         PrintWriter out = response.getWriter();
 
-        // Получаем параметры из запроса
         int stalkerId = Integer.parseInt(request.getParameter("stalkerId"));
 
-        // Вызываем метод удаления сталкера
         stalkerCrud.deleteStalker(stalkerId);
 
-        // Возвращаем ответ клиенту
         out.println("Сталкер успешно удален.");
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        PrintWriter out = response.getWriter();
+
+        int stalkerId = Integer.parseInt(request.getParameter("stalkerId"));
+
+        // Вызываем метод получения сталкера по ID
+        Stalker stalker = stalkerCrud.getStalkerById(stalkerId);
+
+        if (stalker != null) {
+            out.println("ID: " + stalker.getId());
+            out.println("FirstName: " + stalker.getFirstName());
+            out.println("SecondName: " + stalker.getSecondName());
+            out.println("Location: " + stalker.getLocation());
+            out.println("Suit: " + stalker.getSuit());
+            out.println("Weapon: " + stalker.getWeapon());
+            out.println("Money: " + stalker.getMoney());
+            out.println("Rank: " + stalker.getRank());
+            out.println("Group: " + stalker.getGroup());
+        } else {
+            out.println("Сталкер не найден.");
+        }
     }
 }

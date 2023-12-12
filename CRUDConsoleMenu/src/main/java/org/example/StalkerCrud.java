@@ -143,4 +143,36 @@ public class StalkerCrud {
         return scanner.nextInt();
     }
 
+    public Stalker getStalkerById(int stalkerId) {
+        try {
+            String sql = "SELECT * FROM stalker WHERE id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setInt(1, stalkerId);
+
+                ResultSet resultSet = statement.executeQuery();
+                if (resultSet.next()) {
+                    // Создаем объект Stalker на основе данных из базы
+                    Stalker stalker = new Stalker(
+                            resultSet.getInt("stalker_id"),
+                            resultSet.getString("first_name"),
+                            resultSet.getString("second_name"),
+                            resultSet.getString("location_id"),
+                            resultSet.getString("suit_id"),
+                            resultSet.getString("weapon_id"),
+                            resultSet.getInt("money"),
+                            resultSet.getString("rank_id"),
+                            resultSet.getString("group_id")
+                    );
+
+                    return stalker;
+                } else {
+                    System.out.println("Ошибка: Сталкер не найден.");
+                    return null;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
