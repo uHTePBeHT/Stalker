@@ -74,4 +74,18 @@ public class LocationCrud {
             return false;
         }
     }
+
+    public String getLocationNameById(int locationId) {
+        String query = "SELECT location_name FROM location WHERE location_id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, locationId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getString("location_name");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

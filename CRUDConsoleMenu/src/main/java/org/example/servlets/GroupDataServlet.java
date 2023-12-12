@@ -53,7 +53,6 @@ public class GroupDataServlet extends HttpServlet {
 
         int groupId = Integer.parseInt(request.getParameter("groupId"));
 
-        // Вызываем метод получения группы по ID
         String groupName = groupDataCrud.getGroupNameById(groupId);
 
         if (groupName != null) {
