@@ -1,14 +1,50 @@
 package org.example;
+
 import org.apache.catalina.Context;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.startup.Tomcat;
+import org.apache.catalina.Wrapper;
 import org.example.servlets.*;
 import javax.servlet.http.HttpServlet;
 import java.sql.SQLException;
+import org.example.servlets.GroupDataServlet;
 
-public class MainApp extends HttpServlet {
-    public static void main(String[] args) {
-        try {
+public class MainApp {
+    public static void main(String[] args) throws LifecycleException, SQLException {
+
+        Tomcat tomcat = new Tomcat();
+        tomcat.setPort(8080);
+        tomcat.getConnector();
+
+        Context ctx = tomcat.addContext("", null);
+
+        Wrapper groupDataS = Tomcat.addServlet(ctx, "groupDataServlet", new GroupDataServlet());
+        groupDataS.setLoadOnStartup(1);
+        groupDataS.addMapping("/group/*");
+
+        Wrapper rankS = Tomcat.addServlet(ctx, "rankServlet", new RankServlet());
+        rankS.setLoadOnStartup(1);
+        rankS.addMapping("/rank/*");
+
+        Wrapper locationS = Tomcat.addServlet(ctx, "locationServlet", new LocationServlet());
+        locationS.setLoadOnStartup(1);
+        locationS.addMapping("/location/*");
+
+        Wrapper suitS = Tomcat.addServlet(ctx, "suitServlet", new SuitServlet());
+        suitS.setLoadOnStartup(1);
+        suitS.addMapping("/suit/*");
+
+        Wrapper weaponS = Tomcat.addServlet(ctx, "weaponServlet", new WeaponServlet());
+        weaponS.setLoadOnStartup(1);
+        weaponS.addMapping("/weapon/*");
+
+        Wrapper stalkerS = Tomcat.addServlet(ctx, "stalkerServlet", new StalkerServlet());
+        stalkerS.setLoadOnStartup(1);
+        stalkerS.addMapping("/stalker/*");
+
+        tomcat.start();
+
+        /*try {
             Tomcat tomcat = new Tomcat();
 
             tomcat.setPort(8080);
@@ -46,6 +82,6 @@ public class MainApp extends HttpServlet {
             e.printStackTrace();
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }
+        }*/
     }
 }
