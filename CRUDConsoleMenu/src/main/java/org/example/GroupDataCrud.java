@@ -89,4 +89,18 @@ public class GroupDataCrud {
         }
     }
 
+    public String getGroupNameById(int groupId) {
+        String query = "SELECT group_name FROM group_data WHERE group_id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, groupId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getString("group_name");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }
