@@ -74,4 +74,18 @@ public class WeaponCrud {
             return false;
         }
     }
+
+    public String getWeaponNameById(int weaponId) {
+        String query = "SELECT weapon_name FROM weapon WHERE weapon_id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, weaponId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getString("weapon_name");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
