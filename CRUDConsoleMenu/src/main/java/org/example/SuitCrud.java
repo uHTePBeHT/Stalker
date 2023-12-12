@@ -73,4 +73,18 @@ public class SuitCrud {
             return false;
         }
     }
+
+    public String getSuitNameById(int suitId) {
+        String query = "SELECT suit_name FROM suit WHERE suit_id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, suitId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getString("suit_name");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

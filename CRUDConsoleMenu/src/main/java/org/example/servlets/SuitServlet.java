@@ -2,12 +2,14 @@ package org.example.servlets;
 
 import org.example.SuitCrud;
 
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+@WebServlet("/suit")
 public class SuitServlet extends HttpServlet {
     private final SuitCrud suitCrud;
 
@@ -18,40 +20,46 @@ public class SuitServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         PrintWriter out = response.getWriter();
 
-        // Получаем параметры из запроса
         String suitName = request.getParameter("suitName");
 
-        // Вызываем метод создания костюма
         suitCrud.createSuit(suitName);
 
-        // Возвращаем ответ клиенту
         out.println("Костюм успешно создан.");
     }
 
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws IOException {
         PrintWriter out = response.getWriter();
 
-        // Получаем параметры из запроса
         int suitId = Integer.parseInt(request.getParameter("suitId"));
         String newSuitName = request.getParameter("newSuitName");
 
-        // Вызываем метод обновления костюма
         suitCrud.updateSuit(suitId, newSuitName);
 
-        // Возвращаем ответ клиенту
         out.println("Костюм успешно обновлен.");
     }
 
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
         PrintWriter out = response.getWriter();
 
-        // Получаем параметры из запроса
         int suitId = Integer.parseInt(request.getParameter("suitId"));
 
-        // Вызываем метод удаления костюма
         suitCrud.deleteSuit(suitId);
 
-        // Возвращаем ответ клиенту
         out.println("Костюм успешно удален.");
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        PrintWriter out = response.getWriter();
+
+        int suitId = Integer.parseInt(request.getParameter("suitId"));
+
+        String suitName = suitCrud.getSuitNameById(suitId);
+
+        if (suitName != null) {
+            out.println("ID: " + suitId);
+            out.println("SuitName: " + suitName);
+        } else {
+            out.println("Костюм не найден.");
+        }
     }
 }
