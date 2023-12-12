@@ -1,12 +1,15 @@
 package org.example.servlets;
 
 import org.example.*;
+
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+@WebServlet("/stalker")
 public class StalkerServlet extends HttpServlet {
     private final StalkerCrud stalkerCrud;
 
