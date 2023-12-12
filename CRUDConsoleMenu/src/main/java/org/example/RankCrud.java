@@ -72,4 +72,18 @@ public class RankCrud {
             return false;
         }
     }
+
+    public String getRankNameById(int rankId) {
+        String query = "SELECT rank_name FROM rank WHERE rank_id = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, rankId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getString("rank_name");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
